@@ -1,4 +1,4 @@
-Entity = function (mesh) {
+export function Entity(mesh) {
 
     THREE.Group.apply(this);
 
@@ -170,7 +170,7 @@ Entity.prototype = Object.assign(Object.create(THREE.Group.prototype), {
     }
 });
 
-SteeringEntity = function (mesh) {
+export function SteeringEntity(mesh) {
 
     Entity.call(this, mesh);
 
