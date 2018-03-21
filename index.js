@@ -1,4 +1,4 @@
-export function Entity(mesh) {
+const Entity = function(mesh) {
 
     THREE.Group.apply(this);
 
@@ -6,7 +6,7 @@ export function Entity(mesh) {
     this.mass = 1;
     this.maxSpeed = 10;
 
-    this.position = new THREE.Vector3(0, 0, 0);
+    this.position.copy(new THREE.Vector3(0, 0, 0));
     this.velocity = new THREE.Vector3(0, 0, 0);
 
     this.box = new THREE.Box3().setFromObject(mesh);
@@ -87,10 +87,11 @@ export function Entity(mesh) {
 Entity.prototype = Object.assign(Object.create(THREE.Group.prototype), {
     constructor: Entity,
 
-    update: function () {
+    update: function (secondFraction) {
         this.velocity.clampLength(0, this.maxSpeed)
         this.velocity.setY(0);
-        this.position.add(this.velocity)
+        // this.position.add(this.velocity);
+        this.position.add(this.velocity.clone().multiplyScalar(secondFraction));
     },
 
 
@@ -170,7 +171,7 @@ Entity.prototype = Object.assign(Object.create(THREE.Group.prototype), {
     }
 });
 
-export function SteeringEntity(mesh) {
+const SteeringEntity = function(mesh) {
 
     Entity.call(this, mesh);
 
@@ -415,12 +416,12 @@ SteeringEntity.prototype = Object.assign(Object.create(Entity.prototype), {
         this.steeringForce.add(avoidance);
     },
 
-    update: function () {
+    update: function (secondFraction) {
         this.steeringForce.clampLength(0, this.maxForce);
         this.steeringForce.divideScalar(this.mass);
         this.velocity.add(this.steeringForce);
         this.steeringForce.set(0, 0, 0);
-        Entity.prototype.update.call(this);
+        Entity.prototype.update.call(this, [secondFraction]);
     }
 });
 
@@ -463,12 +464,7 @@ Object.defineProperty(THREE.Vector3.prototype, 'angle', {
 
 });
 
-
-
-
-
-
-
-
-
-
+module.exports = {
+    Entity,
+    SteeringEntity
+};
