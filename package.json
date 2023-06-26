@@ -1,6 +1,6 @@
 {
   "name": "three-steer",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "description": "Basic steering behaviors library based on THREE.js",
   "main": "index.js",
   "directories": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlexusBlack/three-steer.git"
+    "url": "git+https://github.com/foufrix/three-steer.git"
   },
   "keywords": [
     "three.js",
@@ -20,7 +20,10 @@
   "author": "Eros Marcon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AlexusBlack/three-steer/issues"
+    "url": "https://github.com/foufrix/three-steer/issues"
   },
-  "homepage": "https://github.com/AlexusBlack/three-steer#readme"
+  "homepage": "https://github.com/foufrix/three-steer#readme",
+  "dependencies": {
+    "three": "^0.153.0"
+  }
 }
